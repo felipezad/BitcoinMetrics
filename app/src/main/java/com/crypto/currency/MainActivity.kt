@@ -1,7 +1,8 @@
-package com.crypto.currency.bitcoin
+package com.crypto.currency
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.crypto.currency.bitcoin.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
