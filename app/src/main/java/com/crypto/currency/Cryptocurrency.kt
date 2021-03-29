@@ -1,8 +1,8 @@
-package com.crypto.currency.bitcoin
+package com.crypto.currency
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class CryptoBitcoinApplication : Application() {
+class Cryptocurrency : Application() {
 }
