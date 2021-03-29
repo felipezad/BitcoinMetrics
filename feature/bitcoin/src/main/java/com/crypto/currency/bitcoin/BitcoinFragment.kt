@@ -1,9 +1,9 @@
 package com.crypto.currency.bitcoin
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinBinding
 import com.crypto.currency.ui.BaseFragment
-
 
 class BitcoinFragment : BaseFragment<BitcoinViewModel, FragmentBitcoinBinding>() {
 
@@ -14,10 +14,12 @@ class BitcoinFragment : BaseFragment<BitcoinViewModel, FragmentBitcoinBinding>()
     }
 
     override fun setupViewModel() {
-        TODO("Not yet implemented")
+        //TODO Change
+        Log.d("setupViewModel", "setupViewModel")
     }
 
     override fun setupView() {
-        TODO("Not yet implemented")
+        //TODO Change
+        Log.d("setupViewModel", "setupViewModel")
     }
 }
