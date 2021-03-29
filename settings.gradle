@@ -1,3 +1,4 @@
+include ':feature:bitcoin'
 include ':core:di'
 include ':common:model'
 include ':app'
