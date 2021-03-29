@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+ext {
+    def moshi_version = '1.11.0'
+    def moshi_converter_version = '2.9.0'
+
+    libraries = [
+            //moshi
+            "com.squareup.moshi:moshi:$moshi_version",
+            "com.squareup.moshi:moshi-kotlin:$moshi_version",
+            "com.squareup.retrofit2:converter-moshi:$moshi_converter_version"
+    ]
+    librariesKapt = [
+            //Moshi
+            "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    ]
+}
+
+dependencies {
+    implementation libraries
+    kapt librariesKapt
+}

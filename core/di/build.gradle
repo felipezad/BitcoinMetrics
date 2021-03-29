@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField 'String', 'BASE_URL', '"https://api.blockchain.info/charts/"'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        consumerProguardFiles "consumer-rules.pro"
+        javaCompileOptions {
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+ext {
+    def hilt_version = '2.33-beta'
+    def moshi_version = '1.11.0'
+    def moshi_converter_version = '2.9.0'
+    def glide_version = '4.12.0'
+
+    libraries = [
+            //dependecy injection - hilt
+            "com.google.dagger:hilt-android:$hilt_version",
+
+            //moshi
+            "com.squareup.moshi:moshi:$moshi_version",
+            "com.squareup.moshi:moshi-kotlin:$moshi_version",
+            "com.squareup.retrofit2:converter-moshi:$moshi_converter_version",
+
+            // Glide
+            "com.github.bumptech.glide:glide:$glide_version"
+    ]
+    librariesKapt = [
+            //Hilt
+            "com.google.dagger:hilt-compiler:$hilt_version",
+
+            //Moshi
+            "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version",
+
+            //Glide
+            "com.github.bumptech.glide:compiler:$glide_version"
+    ]
+}
+dependencies {
+    implementation libraries
+    kapt librariesKapt
+
+    implementation project(":common:model")
+}

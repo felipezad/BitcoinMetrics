@@ -1,0 +1,4 @@
+include ':core:di'
+include ':common:model'
+include ':app'
+rootProject.name = "BitcoinMetrics"
