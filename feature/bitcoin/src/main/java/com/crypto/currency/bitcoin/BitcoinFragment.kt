@@ -1,21 +1,23 @@
 package com.crypto.currency.bitcoin
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinBinding
+import com.crypto.currency.ui.BaseFragment
 
 
-class BitcoinFragment : Fragment() {
+class BitcoinFragment : BaseFragment<BitcoinViewModel, FragmentBitcoinBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return FragmentBitcoinBinding.inflate(inflater).root
+    override val mViewModel: BitcoinViewModel by viewModels()
+
+    override fun getViewBinding(): FragmentBitcoinBinding {
+        return FragmentBitcoinBinding.inflate(layoutInflater)
     }
 
+    override fun setupViewModel() {
+        TODO("Not yet implemented")
+    }
+
+    override fun setupView() {
+        TODO("Not yet implemented")
+    }
 }
