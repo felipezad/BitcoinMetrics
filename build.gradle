@@ -21,6 +21,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
     }
@@ -64,7 +65,7 @@ ext {
 
     libraries = [
             // Android Chart Library
-            "com.github.PhilJay:MPAndroidChart:$android_chart_version",
+            "com.github.PhilJay:MPAndroidChart:${android_chart_version}",
 
             // Kotlin standard library
             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
