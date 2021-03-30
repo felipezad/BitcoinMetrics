@@ -3,6 +3,7 @@ package com.crypto.currency.bitcoin
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
+import com.crypto.currency.di.mapper.EpochFormatter
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
@@ -37,12 +38,12 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 val lineData = LineData(lineDataset)
 
                 mViewBinding.lineChart.run {
+                    xAxis.valueFormatter = EpochFormatter
                     data = lineData
                     invalidate()
                 }
             }
         })
-
-
     }
+
 }
