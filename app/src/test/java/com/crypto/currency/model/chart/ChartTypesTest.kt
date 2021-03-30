@@ -23,7 +23,7 @@ internal class ChartTypesTest(val literalName: String, val enumType: ChartTypes)
     }
 
     @Test
-    fun test() {
+    fun `should guarantee the charts names didn't change in the enum`() {
         assertEquals(literalName, enumType.graphName)
     }
 }
