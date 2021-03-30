@@ -16,11 +16,11 @@ data class BitcoinChartResponse(
     @Json(name = "unit")
     val unit: String,
     @Json(name = "values")
-    val values: List<Value>
+    val values: List<ValueResponse>
 )
 
 @JsonClass(generateAdapter = true)
-data class Value(
+data class ValueResponse(
     @Json(name = "x")
     val x: Int,
     @Json(name = "y")
