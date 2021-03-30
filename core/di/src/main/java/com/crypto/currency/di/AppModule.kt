@@ -2,7 +2,7 @@ package com.crypto.currency.di
 
 import android.app.Application
 import com.bumptech.glide.Glide
-import com.crypto.currency.di.api.BitcoinService
+import com.crypto.currency.di.api.BitcoinChartService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -21,7 +21,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): BitcoinService {
+    fun provideRetrofit(okHttpClient: OkHttpClient): BitcoinChartService {
         val moshi = Moshi.Builder()
             .add(WhenNullReturnEmptyFactory)
             .addLast(KotlinJsonAdapterFactory())
@@ -32,7 +32,7 @@ object AppModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
-            .create(BitcoinService::class.java)
+            .create(BitcoinChartService::class.java)
     }
 
     @Singleton

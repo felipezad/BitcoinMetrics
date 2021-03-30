@@ -31,7 +31,7 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentContext = this.context
         setupView()
-        setupViewModel()
+        startViewModel()
     }
 
     override fun onCreateView(
@@ -44,7 +44,7 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding> : Fragment() {
 
     abstract fun getViewBinding(): VB
 
-    abstract fun setupViewModel()
+    abstract fun startViewModel()
 
     abstract fun setupView()
 }

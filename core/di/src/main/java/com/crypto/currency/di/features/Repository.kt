@@ -2,11 +2,9 @@ package com.crypto.currency.di.features
 
 import com.crypto.currency.model.ActionResult
 
-interface Repository<T> {
+interface Repository<in Param, out Result : Any> {
 
-    suspend fun insertDataIntoRoom(data: T): ActionResult<Boolean>
+    suspend fun getElementsFromApi(param: Param): ActionResult<Result>
 
-    suspend fun getElementsFromApi(page: Int): ActionResult<List<T>>
-
-    suspend fun getElementsFromDatabase(): ActionResult<List<T>>
+    suspend fun getElementsFromDatabase(): ActionResult<Result>
 }

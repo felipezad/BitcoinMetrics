@@ -1,4 +1,4 @@
-package com.crypto.currency.model.graph
+package com.crypto.currency.model.chart
 
 data class BitcoinChart(
     val description: String,

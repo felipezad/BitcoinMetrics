@@ -3,6 +3,7 @@ package com.crypto.currency.bitcoin
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
+import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,9 +16,10 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         return FragmentBitcoinChartBinding.inflate(layoutInflater)
     }
 
-    override fun setupViewModel() {
+    override fun startViewModel() {
         //TODO Change
         Log.d("setupViewModel", "setupViewModel")
+        mViewModel.getCharByName(ChartTypes.TRANSACTIONS_PER_SECOND)
     }
 
     override fun setupView() {
