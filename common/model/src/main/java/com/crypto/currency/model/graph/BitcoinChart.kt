@@ -1,6 +1,6 @@
 package com.crypto.currency.model.graph
 
-data class BitcoinGraph(
+data class BitcoinChart(
     val description: String,
     val name: String,
     val period: String,

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/bitcoinFragment"
-        android:name="com.crypto.currency.bitcoin.BitcoinFragment"
+        android:name="com.crypto.currency.bitcoin.BitcoinChartFragment"
         android:label="Blank"
-        tools:layout="@layout/fragment_bitcoin" />
+        tools:layout="@layout/fragment_bitcoin_chart" />
 
 </navigation>

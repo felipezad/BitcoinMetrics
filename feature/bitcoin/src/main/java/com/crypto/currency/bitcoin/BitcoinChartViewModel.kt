@@ -5,5 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class BitcoinViewModel @Inject constructor() : ViewModel() {
+class BitcoinChartViewModel @Inject constructor(
+    private val getCharUseCase: GetCharUseCase
+) : ViewModel() {
 }
