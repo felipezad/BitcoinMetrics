@@ -29,4 +29,6 @@ ext {
 dependencies {
     implementation libraries
     kapt librariesKapt
+
+    testImplementation testLibraries
 }
