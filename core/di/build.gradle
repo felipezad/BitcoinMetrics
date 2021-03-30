@@ -74,4 +74,7 @@ dependencies {
     kapt librariesKapt
 
     implementation project(":common:model")
+
+    testImplementation testLibraries
+    androidTestImplementation androidTestLibraries
 }

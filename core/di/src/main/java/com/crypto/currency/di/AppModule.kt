@@ -3,6 +3,7 @@ package com.crypto.currency.di
 import android.app.Application
 import com.bumptech.glide.Glide
 import com.crypto.currency.di.api.BitcoinChartService
+import com.crypto.currency.di.mapper.EpochFormatter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -48,4 +49,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRequestManagerGlide(application: Application) = Glide.with(application)
+
+    @Provides
+    fun provideEpochFormatter() = EpochFormatter
 }
