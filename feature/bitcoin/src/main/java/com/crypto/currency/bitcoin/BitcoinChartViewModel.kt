@@ -26,7 +26,7 @@ class BitcoinChartViewModel @Inject constructor(
 
     fun getCharByName(chartName: ChartTypes) {
         viewModelScope.launch {
-            notifyUI(getChartByNameUseCase.execute(GetChartByNameUseCase.Param(chartName.graphName)))
+            notifyUI(getChartByNameUseCase.execute(GetChartByNameUseCase.Param(chartName)))
         }
     }
 
