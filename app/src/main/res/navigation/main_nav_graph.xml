@@ -8,7 +8,16 @@
     <fragment
         android:id="@+id/bitcoinFragment"
         android:name="com.crypto.currency.bitcoin.BitcoinChartFragment"
-        android:label="Blank"
-        tools:layout="@layout/fragment_bitcoin_chart" />
+        android:label="bitcoinChart">
+        <action
+            android:id="@+id/action_bitcoinFragment_self"
+            app:destination="@id/bitcoinFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim" />
+        <argument
+            android:name="chartName"
+            android:defaultValue="total-bitcoins"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

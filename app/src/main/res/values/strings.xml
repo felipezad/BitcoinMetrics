@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BitcoinMetrics</string>
+    <string name="chart_one">Chart One</string>
+    <string name="chart_two">Chart Two</string>
+    <string name="chart_three">Chart Three</string>
 </resources>
