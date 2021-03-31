@@ -1,6 +1,10 @@
 package com.crypto.currency.bitcoin
 
+import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
@@ -22,6 +26,16 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
 
     override fun getViewBinding(): FragmentBitcoinChartBinding {
         return FragmentBitcoinChartBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val chartName =
+            arguments?.getString("chartName", ChartTypes.TRANSACTIONS_PER_SECOND.chartName)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun startViewModel() {

@@ -1,7 +1,7 @@
 package com.crypto.currency.model.chart
 
 import com.crypto.currency.model.chart.ChartTypes.*
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -24,6 +24,6 @@ internal class ChartTypesTest(val literalName: String, val enumType: ChartTypes)
 
     @Test
     fun `should guarantee the charts names didn't change in the enum`() {
-        assertEquals(literalName, enumType.graphName)
+        assertEquals(literalName, enumType.chartName)
     }
 }

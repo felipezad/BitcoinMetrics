@@ -11,7 +11,7 @@ class GetChartByNameUseCase @Inject constructor(
 ) : UseCase<GetChartByNameUseCase.Param, BitcoinChart> {
 
     override suspend fun execute(param: Param): ActionResult<BitcoinChart> {
-        return bitcoinChartRepository.getElementsFromApi(param.chart.graphName)
+        return bitcoinChartRepository.getElementsFromApi(param.chart.chartName)
     }
 
     data class Param(val chart: ChartTypes)
