@@ -12,6 +12,7 @@ import com.crypto.currency.di.mapper.EpochFormatter
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
+import com.crypto.currency.ui.BundleKey
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.Legend.LegendForm
@@ -28,20 +29,23 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         return FragmentBitcoinChartBinding.inflate(layoutInflater)
     }
 
+    private var charType: ChartTypes = ChartTypes.TOTAL_BITCOINS
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val chartName =
-            arguments?.getString("chartName", ChartTypes.TRANSACTIONS_PER_SECOND.chartName)
+        arguments?.getString(BundleKey.CHART_NAME.key)?.let {
+            charType = ChartTypes.from(it)
+        }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun startViewModel() {
         //TODO Change
         Log.d("startViewModel", "startViewModel")
-        mViewModel.getCharByName(ChartTypes.TRANSACTIONS_PER_SECOND)
+        mViewModel.getCharByName(charType)
     }
 
     override fun setupView() {

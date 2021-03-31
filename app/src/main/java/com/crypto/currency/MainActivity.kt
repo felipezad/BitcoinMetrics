@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
+        //TODO Extract
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_bottom_chart_one -> {
