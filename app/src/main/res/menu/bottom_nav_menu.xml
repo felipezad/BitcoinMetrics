@@ -9,9 +9,4 @@
         android:id="@+id/navigation_bottom_chart_two"
         android:icon="@android:drawable/btn_plus"
         android:title="@string/chart_two" />
-
-    <item
-        android:id="@+id/navigation_bottom_chart_three"
-        android:icon="@android:drawable/btn_plus"
-        android:title="@string/chart_three" />
 </menu>
