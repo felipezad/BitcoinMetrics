@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.crypto.currency.bitcoin.R
@@ -19,13 +20,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupView()
+    }
+
+    override fun onBackPressed() {
+        val bottomNavigationView = findViewById<View>(R.id.nav_view) as BottomNavigationView
+        val selectedItemId = bottomNavigationView.selectedItemId
+        if (R.id.navigation_bottom_chart_one != selectedItemId) {
+            bottomNavigationView.selectedItemId = R.id.navigation_bottom_chart_one
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun setupView() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
-        //TODO Extract
+        setupBottomNavigation(navView, navController)
+    }
+
+    private fun setupBottomNavigation(navView: BottomNavigationView, navController: NavController) {
         navView.setOnNavigationItemSelectedListener { item ->
             val nextMetrics = R.id.action_bitcoinFragment_self
             when (item.itemId) {
@@ -43,18 +61,15 @@ class MainActivity : AppCompatActivity() {
                     )
                     true
                 }
+                R.id.navigation_bottom_chart_three -> {
+                    navController.navigate(
+                        nextMetrics,
+                        bundleOf(BundleKey.CHART_NAME.key to ChartTypes.TRANSACTIONS_TOTAL.chartName)
+                    )
+                    true
+                }
                 else -> false
             }
-        }
-    }
-
-    override fun onBackPressed() {
-        val bottomNavigationView = findViewById<View>(R.id.nav_view) as BottomNavigationView
-        val selectedItemId = bottomNavigationView.selectedItemId
-        if (R.id.navigation_bottom_chart_one != selectedItemId) {
-            bottomNavigationView.selectedItemId = R.id.navigation_bottom_chart_one
-        } else {
-            super.onBackPressed()
         }
     }
 }
