@@ -20,6 +20,7 @@ import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.data.*
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoinChartBinding>() {
 
@@ -55,7 +56,7 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             bitcoinChart.values.take(5).mapTo(mutableListOf<Entry>(), { value ->
                 Entry(value.x.toFloat(), value.y.toFloat())
             }).also {
-                val lineDataset = LineDataSet(it, ChartTypes.TRANSACTIONS_PER_SECOND.name)
+                val lineDataset = LineDataSet(it, charType.name)
                 val lineData = LineData(lineDataset)
 
                 mViewBinding.lineChart.run {
@@ -77,10 +78,11 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                     invalidate()
                 }
             }
+            var count = 1.0f
             bitcoinChart.values.take(5).mapTo(mutableListOf(), { value ->
-                BarEntry(value.x.toFloat(), value.y.toFloat())
+                BarEntry(++count, value.y.toFloat())
             }).also {
-                val barDataSet = BarDataSet(it, ChartTypes.TOTAL_BITCOINS.name)
+                val barDataSet = BarDataSet(it, charType.name)
                 val barData = BarData(barDataSet)
                 barData.barWidth = 0.9f
 
