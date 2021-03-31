@@ -100,7 +100,7 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             bitcoinChart.values.take(5).mapTo(mutableListOf(), { value ->
                 PieEntry(value.y.toFloat())
             }).also {
-                val pieDataSet = PieDataSet(it, ChartTypes.TRANSACTIONS_TOTAL.name)
+                val pieDataSet = PieDataSet(it, charType.name)
                 val pieData = PieData(pieDataSet)
 
                 mViewBinding.pieChart.run {
