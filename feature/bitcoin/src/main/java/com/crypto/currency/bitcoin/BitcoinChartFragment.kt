@@ -49,12 +49,11 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         //TODO Change
         Log.d("setupView", "setupView")
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
-            var xAx = 1f
-            var yAx = 1f
+            var numberOfColumnsX = 0f
             val listSize = bitcoinChart.values.size
             bitcoinChart.values.subList(listSize - 7, listSize)
-                .mapTo(mutableListOf<Entry>(), { value ->
-                    Entry(xAx++, value.y.toFloat())
+                .mapTo(mutableListOf(), { value ->
+                    Entry(numberOfColumnsX++, value.y.toFloat())
                 }).also {
                     val lineDataset = LineDataSet(it, charType.name)
                     val lineData = LineData(lineDataset)
@@ -64,9 +63,11 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                         xAxis.position = XAxisPosition.BOTTOM
                         xAxis.granularity = 1f
                         xAxis.labelCount = 7
+                        xAxis.setDrawLabels(false)
+
+                        axisRight.setDrawLabels(false)
                         axisRight.isEnabled = false
 
-                        axisLeft.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
                         axisLeft.setDrawLabels(false)
 
                         description.text = ""
@@ -78,7 +79,7 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 }
 
             bitcoinChart.values.subList(listSize - 7, listSize).mapTo(mutableListOf(), { value ->
-                BarEntry(xAx++, value.y.toFloat())
+                BarEntry(numberOfColumnsX++, value.y.toFloat())
             }).also {
                 val barDataSet = BarDataSet(it, charType.name)
 
