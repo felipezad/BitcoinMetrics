@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
 import com.crypto.currency.di.mapper.EpochFormatter
@@ -13,7 +12,6 @@ import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
 import com.crypto.currency.ui.BundleKey
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.Legend.LegendForm
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
@@ -83,7 +81,9 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 BarEntry(++count, value.y.toFloat())
             }).also {
                 val barDataSet = BarDataSet(it, charType.name)
+
                 val barData = BarData(barDataSet)
+                barData.dataSetLabels
                 barData.barWidth = 0.9f
 
                 mViewBinding.barChart.run {
@@ -99,26 +99,15 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                     invalidate()
                 }
             }
-            bitcoinChart.values.take(5).mapTo(mutableListOf(), { value ->
-                PieEntry(value.y.toFloat())
-            }).also {
-                val pieDataSet = PieDataSet(it, charType.name)
-                val pieData = PieData(pieDataSet)
-
-                mViewBinding.pieChart.run {
-                    animateY(1400, Easing.EaseInOutQuad)
-                    data = pieData
-                    invalidate()
-                }
-            }
         })
 
-        mViewBinding.bitcoinScrollView.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                println(
-                    "ScrollX $scrollX -> ScrollY $scrollY"
-                )
-            })
+        mViewModel.loadingState.observe(this, { state ->
+            if (state.isLoading) {
+                mViewBinding.contentLoadingProgressBar.show()
+            } else {
+                mViewBinding.contentLoadingProgressBar.hide()
+            }
+        })
     }
 
 }

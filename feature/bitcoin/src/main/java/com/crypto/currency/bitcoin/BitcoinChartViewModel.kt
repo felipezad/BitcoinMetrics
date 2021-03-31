@@ -24,7 +24,12 @@ class BitcoinChartViewModel @Inject constructor(
     val bitcoinChartData: LiveData<BitcoinChart>
         get() = _bitcoinChartData
 
+    private val _loadingState = MutableLiveData<Loading>()
+    val loadingState: LiveData<Loading>
+        get() = _loadingState
+
     fun getCharByName(chartName: ChartTypes) {
+        _loadingState.value = Loading(true)
         viewModelScope.launch {
             notifyUI(getChartByNameUseCase.execute(GetChartByNameUseCase.Param(chartName)))
         }
@@ -33,8 +38,9 @@ class BitcoinChartViewModel @Inject constructor(
     private fun notifyUI(result: ActionResult<BitcoinChart>) {
         when (result) {
             is Failure -> Log.e("Failure", result.failure.message!!)
-            is Loading -> Log.d("Loading", "Loading")
             is Success -> _bitcoinChartData.value = result.data
+            else -> Log.d("Loading", "Loading")
         }
+        _loadingState.value = Loading(false)
     }
 }
