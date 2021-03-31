@@ -12,6 +12,7 @@ import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
 import com.crypto.currency.ui.BundleKey
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,26 +51,34 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             var xAx = 1f
             var yAx = 1f
+            val listSize = bitcoinChart.values.size
+            bitcoinChart.values.subList(listSize - 7, listSize)
+                .mapTo(mutableListOf<Entry>(), { value ->
+                    Entry(xAx++, value.y.toFloat())
+                }).also {
+                    val lineDataset = LineDataSet(it, charType.name)
+                    val lineData = LineData(lineDataset)
 
-            bitcoinChart.values.mapTo(mutableListOf<Entry>(), { value ->
-                Entry(xAx++, value.y.toFloat())
-            }).also {
-                val lineDataset = LineDataSet(it, charType.name)
-                val lineData = LineData(lineDataset)
 
-                mViewBinding.lineChart.run {
-                    xAxis.position = XAxisPosition.BOTTOM
-                    xAxis.granularity = 1f
-                    xAxis.labelCount = 7
-                    axisRight.isEnabled = false
-                    data = lineData
+                    mViewBinding.lineChart.run {
+                        xAxis.position = XAxisPosition.BOTTOM
+                        xAxis.granularity = 1f
+                        xAxis.labelCount = 7
+                        axisRight.isEnabled = false
 
-                    invalidate()
+                        axisLeft.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+                        axisLeft.setDrawLabels(false)
+
+                        description.text = ""
+
+                        data = lineData
+
+                        invalidate()
+                    }
                 }
-            }
 
-            bitcoinChart.values.mapTo(mutableListOf(), { value ->
-                BarEntry(xAx++, yAx++)
+            bitcoinChart.values.subList(listSize - 7, listSize).mapTo(mutableListOf(), { value ->
+                BarEntry(xAx++, value.y.toFloat())
             }).also {
                 val barDataSet = BarDataSet(it, charType.name)
 
@@ -78,11 +87,13 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 barData.barWidth = 0.9f
 
                 mViewBinding.barChart.run {
-                    setMaxVisibleValueCount(10)
+                    setFitBars(true)
                     xAxis.position = XAxisPosition.BOTTOM
                     xAxis.setDrawGridLines(false)
                     xAxis.granularity = 1f
-                    xAxis.labelCount = 7
+                    xAxis.setDrawLabels(false)
+                    description.text = ""
+
 
                     data = barData
                     setFitBars(true)
