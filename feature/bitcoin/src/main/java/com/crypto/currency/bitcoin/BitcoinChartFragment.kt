@@ -12,7 +12,6 @@ import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
 import com.crypto.currency.ui.BundleKey
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import dagger.hilt.android.AndroidEntryPoint
 

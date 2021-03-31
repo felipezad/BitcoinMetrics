@@ -8,14 +8,8 @@ import kotlin.random.Random
 
 object BitcoinChartFakeFactory {
 
-    fun createEmptyBitcoinChart() =
-        BitcoinChart("description", "name", "period", "status", "unit", listOf())
-
     fun createFullBitcoinChart() =
         BitcoinChart("description", "name", "period", "status", "unit", createListOfValues())
-
-    fun createEmptyBitcoinChartResponse() =
-        BitcoinChartResponse("description", "name", "period", "status", "unit", listOf())
 
     fun createFullBitcoinChartResponse() =
         BitcoinChartResponse(

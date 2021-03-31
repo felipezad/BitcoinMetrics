@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class ChartTypesTest(val literalName: String, val enumType: ChartTypes) {
+internal class ChartTypesTest(private val literalName: String, private val enumType: ChartTypes) {
 
     companion object {
         @JvmStatic

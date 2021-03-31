@@ -1,4 +1,4 @@
-package com.crypto.currency.di
+package com.crypto.currency.di.features
 
 import android.content.Context
 import com.bumptech.glide.RequestManager
