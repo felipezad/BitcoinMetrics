@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.crypto.currency.di.api.BitcoinChartService
 import com.crypto.currency.di.mapper.EpochFormatter
+import com.crypto.currency.di.storage.InMemoryStorage
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -52,4 +53,8 @@ object AppModule {
 
     @Provides
     fun provideEpochFormatter() = EpochFormatter
+
+    @Provides
+    @Singleton
+    fun provideInMemoryStorage() = InMemoryStorage()
 }
