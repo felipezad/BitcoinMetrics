@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.crypto.currency.filters.databinding.ActivityFilterBinding
-import com.crypto.currency.model.chart.BitcoinFilter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +23,7 @@ class FilterActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        filterViewModel.addFilters(BitcoinFilter.defaultFilter())
+        filterViewModel.addFilters(5, 8)
     }
 
     companion object {

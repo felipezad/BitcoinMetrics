@@ -8,14 +8,16 @@ import com.crypto.currency.model.chart.BitcoinFilter
 import javax.inject.Inject
 
 class AddBitcoinFilterUseCase @Inject constructor(private val repository: FilterRepository) :
-    UseCase<BitcoinFilter, BitcoinFilter> {
+    UseCase<AddBitcoinFilterUseCase.Param, BitcoinFilter> {
 
-    override suspend fun execute(param: BitcoinFilter): ActionResult<BitcoinFilter> {
+    override suspend fun execute(param: Param): ActionResult<BitcoinFilter> {
         return try {
-            val result = repository.addToStorage(param)
+            val result = repository.addToStorage(param.bitcoinFilter)
             Success(result)
         } catch (e: Exception) {
             Failure(e)
         }
     }
+
+    data class Param(val bitcoinFilter: BitcoinFilter)
 }

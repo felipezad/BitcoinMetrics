@@ -1,8 +1,9 @@
-package com.crypto.currency.bitcoin
+package com.crypto.currency.filters
 
 import com.crypto.currency.model.Failure
 import com.crypto.currency.model.Success
-import com.crypto.currency.model.chart.ChartTypes
+import com.crypto.currency.model.chart.BitcoinFilter
+import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -14,25 +15,23 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class GetChartByNameUseCaseTest {
-
+class AddBitcoinFilterUseCaseTest {
     private val testDispatcher = TestCoroutineDispatcher()
 
     @MockK
-    lateinit var mockBitcoinChartRepository: BitcoinChartRepository
+    lateinit var mockFilterRepository: FilterRepository
 
-    private lateinit var getGetChartByNameUseCase: GetChartByNameUseCase
+    private lateinit var subject: AddBitcoinFilterUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(testDispatcher)
-        getGetChartByNameUseCase = GetChartByNameUseCase(mockBitcoinChartRepository)
+        subject = AddBitcoinFilterUseCase(mockFilterRepository)
     }
 
     @After
@@ -45,13 +44,13 @@ class GetChartByNameUseCaseTest {
     fun `when repository returns data then the result should be success`() {
         runBlockingTest {
             coEvery {
-                mockBitcoinChartRepository.getElementsFromApi(any())
-            } returns Success(mockk())
+                mockFilterRepository.addToStorage(any())
+            } returns mockk()
 
-            val param = GetChartByNameUseCase.Param(ChartTypes.TRANSACTIONS_PER_SECOND)
-            val result = getGetChartByNameUseCase.execute(param)
+            val param = AddBitcoinFilterUseCase.Param(BitcoinFilter.defaultFilter())
+            val result = subject.execute(param)
 
-            assertEquals(true, result is Success)
+            Truth.assertThat(result).isInstanceOf(Success::class.java)
         }
     }
 
@@ -59,13 +58,13 @@ class GetChartByNameUseCaseTest {
     fun `when repository returns exception then the result should be failure`() {
         runBlockingTest {
             coEvery {
-                mockBitcoinChartRepository.getElementsFromApi(any())
-            } returns Failure(mockk())
+                mockFilterRepository.addToStorage(any())
+            } throws Exception()
 
-            val param = GetChartByNameUseCase.Param(ChartTypes.TRANSACTIONS_PER_SECOND)
-            val result = getGetChartByNameUseCase.execute(param)
+            val param = AddBitcoinFilterUseCase.Param(BitcoinFilter.defaultFilter())
+            val result = subject.execute(param)
 
-            assertEquals(true, result is Failure)
+            Truth.assertThat(result).isInstanceOf(Failure::class.java)
         }
     }
 }

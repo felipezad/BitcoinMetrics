@@ -26,10 +26,19 @@ class FilterViewModel @Inject constructor(private val addBitcoinFilterUseCase: A
     val loadingState: LiveData<Loading>
         get() = _loadingState
 
-    fun addFilters(param: BitcoinFilter) {
+    fun addFilters(timeSpan: Int, rollingAverage: Int) {
         _loadingState.value = Loading(true)
         viewModelScope.launch {
-            updateUI(addBitcoinFilterUseCase.execute(param))
+            updateUI(
+                addBitcoinFilterUseCase.execute(
+                    AddBitcoinFilterUseCase.Param(
+                        BitcoinFilter(
+                            timeSpan,
+                            rollingAverage
+                        )
+                    )
+                )
+            )
         }
     }
 

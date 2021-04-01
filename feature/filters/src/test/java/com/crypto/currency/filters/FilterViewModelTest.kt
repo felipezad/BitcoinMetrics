@@ -13,6 +13,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.mockkStatic
 import io.mockk.slot
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -21,6 +22,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class FilterViewModelTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
@@ -58,11 +60,12 @@ class FilterViewModelTest {
 
     @Test
     fun `When filter is send from the user should keep the same values`() {
-        val param = BitcoinFilter.defaultFilter()
-        val slot = slot<BitcoinFilter>()
+        val response = BitcoinFilter.defaultFilter()
+        val param = AddBitcoinFilterUseCase.Param(BitcoinFilter.defaultFilter())
+        val slot = slot<AddBitcoinFilterUseCase.Param>()
         coEvery {
             addBitcoinFilterUseCase.execute(capture(slot))
-        } returns Success(param)
+        } returns Success(BitcoinFilter.defaultFilter())
 
         val loadingStates = mutableListOf<Loading>()
         observerLoadingState = Observer<Loading> {
@@ -70,11 +73,11 @@ class FilterViewModelTest {
         }
         subject.loadingState.observeForever(observerLoadingState)
 
-        subject.addFilters(param)
+        subject.addFilters(5, 8)
 
 
         assertThat(slot.captured).isEqualTo(param)
-        assertThat(subject.filterSaved.value).isEqualTo(param)
+        assertThat(subject.filterSaved.value).isEqualTo(response)
         assertThat(loadingStates).hasSize(2)
         assertThat(loadingStates)
             .isEqualTo(listOf(Loading(true), Loading(false)))

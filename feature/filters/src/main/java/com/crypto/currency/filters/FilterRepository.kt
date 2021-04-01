@@ -7,7 +7,11 @@ import javax.inject.Inject
 class FilterRepository @Inject constructor(private val storage: InMemoryStorage) {
 
     fun addToStorage(param: BitcoinFilter): BitcoinFilter {
-        return storage.putData(param)
+        try {
+            return storage.putData(param)
+        } catch (e: Exception) {
+            throw e
+        }
     }
 }
 
