@@ -3,4 +3,5 @@
     <string name="chart_one">Bitcoin</string>
     <string name="chart_two">Market</string>
     <string name="chart_three">Transactions</string>
+    <string name="menu_item_settings">Settings</string>
 </resources>
