@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class FilterRepository @Inject constructor(private val storage: InMemoryStorage) {
 
-    fun addToStorage(param: BitcoinFilter) {
-        storage.putData(param)
+    fun addToStorage(param: BitcoinFilter): BitcoinFilter {
+        return storage.putData(param)
     }
 }
 

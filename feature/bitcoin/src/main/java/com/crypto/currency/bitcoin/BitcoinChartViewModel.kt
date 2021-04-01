@@ -39,7 +39,7 @@ class BitcoinChartViewModel @Inject constructor(
         when (result) {
             is Failure -> Log.e("Failure", result.failure.message!!)
             is Success -> _bitcoinChartData.value = result.data
-            else -> Log.d("Loading", "Loading")
+            else -> Log.d("else", "else")
         }
         _loadingState.value = Loading(false)
     }
