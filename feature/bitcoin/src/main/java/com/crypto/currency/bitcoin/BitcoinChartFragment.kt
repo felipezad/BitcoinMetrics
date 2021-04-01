@@ -39,8 +39,11 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
     }
 
     override fun startViewModel() {
-        //TODO Change
-        Log.d("startViewModel", "startViewModel")
+        mViewModel.getCharByName(charType)
+    }
+
+    override fun onResume() {
+        super.onResume()
         mViewModel.getCharByName(charType)
     }
 
@@ -50,34 +53,33 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             var numberOfColumnsX = 0f
             val listSize = bitcoinChart.values.size
-            bitcoinChart.values.subList(listSize - 7, listSize)
-                .mapTo(mutableListOf(), { value ->
-                    Entry(numberOfColumnsX++, value.y.toFloat())
-                }).also {
-                    val lineDataset = LineDataSet(it, charType.name)
-                    val lineData = LineData(lineDataset)
+            bitcoinChart.values.take(7).mapTo(mutableListOf(), { value ->
+                Entry(numberOfColumnsX++, value.y.toFloat())
+            }).also {
+                val lineDataset = LineDataSet(it, charType.name)
+                val lineData = LineData(lineDataset)
 
 
-                    mViewBinding.lineChart.run {
-                        xAxis.position = XAxisPosition.BOTTOM
-                        xAxis.granularity = 1f
-                        xAxis.labelCount = 7
-                        xAxis.setDrawLabels(false)
+                mViewBinding.lineChart.run {
+                    xAxis.position = XAxisPosition.BOTTOM
+                    xAxis.granularity = 1f
+                    xAxis.labelCount = 7
+                    xAxis.setDrawLabels(false)
 
-                        axisRight.setDrawLabels(false)
-                        axisRight.isEnabled = false
+                    axisRight.setDrawLabels(false)
+                    axisRight.isEnabled = false
 
-                        axisLeft.setDrawLabels(false)
+                    axisLeft.setDrawLabels(false)
 
-                        description.text = ""
+                    description.text = ""
 
-                        data = lineData
+                    data = lineData
 
-                        invalidate()
-                    }
+                    invalidate()
                 }
+            }
 
-            bitcoinChart.values.subList(listSize - 7, listSize).mapTo(mutableListOf(), { value ->
+            bitcoinChart.values.take(7).mapTo(mutableListOf(), { value ->
                 BarEntry(numberOfColumnsX++, value.y.toFloat())
             }).also {
                 val barDataSet = BarDataSet(it, charType.name)

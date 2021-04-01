@@ -3,7 +3,10 @@ package com.crypto.currency.bitcoin
 import com.crypto.currency.bitcoin.BitcoinChartFakeFactory.createFullBitcoinChart
 import com.crypto.currency.bitcoin.BitcoinChartFakeFactory.createFullBitcoinChartResponse
 import com.crypto.currency.di.api.BitcoinChartService
+import com.crypto.currency.di.storage.InMemoryStorage
 import com.crypto.currency.model.api.BitcoinChartResponse
+import com.crypto.currency.model.api.BitcoinMetricsQueryParam
+import com.google.common.truth.Truth.assertThat
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import junit.framework.Assert.assertTrue
@@ -34,7 +37,8 @@ class BitcoinChartRepositoryTest {
     fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(testDispatcher)
-        bitcoinChartRepository = BitcoinChartRepository(bitcoinChartService, mapper)
+        bitcoinChartRepository =
+            BitcoinChartRepository(bitcoinChartService, mapper, InMemoryStorage())
     }
 
     @After
@@ -49,8 +53,14 @@ class BitcoinChartRepositoryTest {
             mockkConstructor(BitcoinChartResponse::class)
 
             val slot = slot<BitcoinChartResponse>()
+            val slotServiceQueryWeeks = slot<String>()
+            val slotServiceQueryHours = slot<String>()
             coEvery {
-                bitcoinChartService.getChartBy(any())
+                bitcoinChartService.getChartBy(
+                    any(),
+                    capture(slotServiceQueryWeeks),
+                    capture(slotServiceQueryHours)
+                )
             } returns createFullBitcoinChartResponse()
 
 
@@ -61,13 +71,15 @@ class BitcoinChartRepositoryTest {
             bitcoinChartRepository.getElementsFromApi("any")
 
             coVerify(exactly = 1) {
-                bitcoinChartService.getChartBy(any())
+                bitcoinChartService.getChartBy(any(), any(), any())
             }
 
             assertTrue(slot.isCaptured)
             verify(exactly = 1) {
                 mapper.to(slot.captured)
             }
+            assertThat(slotServiceQueryHours.captured).contains(BitcoinMetricsQueryParam.HOURS.suffix)
+            assertThat(slotServiceQueryWeeks.captured).contains(BitcoinMetricsQueryParam.WEEKS.suffix)
         }
     }
 }

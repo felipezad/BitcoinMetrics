@@ -59,7 +59,7 @@ class BitcoinChartServiceTest {
     fun `Request JSON from service and convert to object through Moshi`() {
         runBlocking {
             enqueueResponse("api_mock.json")
-            val apiResponse: BitcoinChartResponse = service.getChartBy("any")
+            val apiResponse: BitcoinChartResponse = service.getChartBy("any", "any", "any")
 
             assertNotNull(apiResponse)
             assertEquals(

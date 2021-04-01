@@ -5,6 +5,4 @@ import com.crypto.currency.model.ActionResult
 interface Repository<in Param, out Result : Any> {
 
     suspend fun getElementsFromApi(param: Param): ActionResult<Result>
-
-    suspend fun getElementsFromDatabase(): ActionResult<Result>
 }
