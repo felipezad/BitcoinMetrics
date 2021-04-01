@@ -38,10 +38,6 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun startViewModel() {
-        mViewModel.getCharByName(charType)
-    }
-
     override fun onResume() {
         super.onResume()
         mViewModel.getCharByName(charType)
