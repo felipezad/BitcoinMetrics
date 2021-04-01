@@ -8,6 +8,7 @@ import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -16,6 +17,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class BitcoinChartRepositoryTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
