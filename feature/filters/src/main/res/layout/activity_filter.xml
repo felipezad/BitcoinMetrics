@@ -23,6 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filtersHeader">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/timeSpanEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/timespan"
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/timeSpan">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rollingAverageEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/rollingaverage"
