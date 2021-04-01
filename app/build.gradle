@@ -60,6 +60,7 @@ dependencies {
     implementation project(":core:ui")
     implementation project(":common:model")
     implementation project(":feature:bitcoin")
+    implementation project(":feature:filters")
 
     implementation libraries
     implementation arch_libraries

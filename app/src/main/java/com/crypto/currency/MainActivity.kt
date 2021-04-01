@@ -3,6 +3,7 @@ package com.crypto.currency
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -14,10 +15,13 @@ import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BundleKey
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var featureNavigator: FeaturesNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val bottomNavigationView = findViewById<View>(R.id.nav_view) as BottomNavigationView
         val selectedItemId = bottomNavigationView.selectedItemId
-        if (R.id.navigation_bottom_chart_one != selectedItemId) {
-            bottomNavigationView.selectedItemId = R.id.navigation_bottom_chart_one
+        if (R.id.navigation_filters != selectedItemId) {
+            bottomNavigationView.selectedItemId = R.id.navigation_filters
         } else {
             super.onBackPressed()
         }
@@ -39,6 +43,14 @@ class MainActivity : AppCompatActivity() {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_main_activity, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_filters -> featureNavigator.navigateToFilters(this)
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupView() {
@@ -55,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             val nextMetrics = R.id.action_bitcoinFragment_self
             when (item.itemId) {
-                R.id.navigation_bottom_chart_one -> {
+                R.id.navigation_filters -> {
                     navController.navigate(
                         nextMetrics,
                         bundleOf(BundleKey.CHART_NAME.key to ChartTypes.TOTAL_BITCOINS.chartName)

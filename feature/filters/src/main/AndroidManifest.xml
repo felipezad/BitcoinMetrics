@@ -3,7 +3,7 @@
     package="com.crypto.currency.filters">
 
     <application>
-        <activity android:name=".FilterActivity"></activity>
+        <activity android:name="com.crypto.currency.filters.FilterActivity" />
     </application>
 
 </manifest>
