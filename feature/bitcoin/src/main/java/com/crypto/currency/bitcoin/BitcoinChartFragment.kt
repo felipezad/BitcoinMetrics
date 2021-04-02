@@ -10,7 +10,6 @@ import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
-import com.crypto.currency.ui.BitcoinChartAdapter
 import com.crypto.currency.ui.BundleKey
 import com.crypto.currency.ui.changeVisibility
 import com.crypto.currency.ui.databinding.BarChartItemBinding
@@ -55,10 +54,11 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             val lastFive = adapter.getLastFiveValues()
             mViewBinding.barchartCustom.root.removeAllViews()
             mViewBinding.barchartCustom.run {
-                lastFive.forEach { pair ->
+                lastFive.forEach { triple ->
                     val item = BarChartItemBinding.inflate(layoutInflater, this.root, false)
-                    item.barLabel.text = pair.second
-                    item.barShape.layoutParams.height = pair.first
+                    item.barShape.layoutParams.height = triple.first
+                    item.barLabel.text = triple.second
+                    item.barLabelDate.text = triple.third
                     this.root.addView(item.root)
                 }
                 this.barCustomChart.invalidate()

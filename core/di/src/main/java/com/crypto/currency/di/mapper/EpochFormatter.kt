@@ -6,12 +6,23 @@ import java.time.format.DateTimeFormatter
 
 object EpochFormatter {
 
-    private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    private val formatterYear: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    private val formatterMonth: DateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
+    private val formatterDay: DateTimeFormatter = DateTimeFormatter.ofPattern("dd")
 
     fun toYearMonthDayDateFormat(epochTime: Long): String {
         return try {
             val localDateTime = LocalDateTime.ofEpochSecond(epochTime, 0, ZoneOffset.UTC)
-            localDateTime.format(formatter)
+            localDateTime.format(formatterYear)
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    fun toMonthDayDateFormat(epochTime: Long): String {
+        return try {
+            val localDateTime = LocalDateTime.ofEpochSecond(epochTime, 0, ZoneOffset.UTC)
+            localDateTime.format(formatterMonth)
         } catch (e: Exception) {
             throw e
         }
