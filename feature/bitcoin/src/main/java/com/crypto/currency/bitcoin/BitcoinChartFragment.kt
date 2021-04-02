@@ -44,11 +44,16 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewModel.getCharByName(chartType)
+    }
+
     override fun setupView() {
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             val adapter = BitcoinChartAdapter(bitcoinChart)
             val lastFive = adapter.getLastFiveValues()
-
+            mViewBinding.barchartCustom.root.removeAllViews()
             mViewBinding.barchartCustom.run {
                 lastFive.forEach { pair ->
                     val item = BarChartItemBinding.inflate(layoutInflater, this.root, false)
@@ -56,7 +61,6 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                     item.barShape.layoutParams.height = pair.first
                     this.root.addView(item.root)
                 }
-
                 this.barCustomChart.invalidate()
             }
             mViewBinding.chartName.text = bitcoinChart.name
