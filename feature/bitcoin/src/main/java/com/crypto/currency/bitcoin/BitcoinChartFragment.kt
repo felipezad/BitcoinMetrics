@@ -1,7 +1,6 @@
 package com.crypto.currency.bitcoin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +44,6 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
     }
 
     override fun setupView() {
-        //TODO Change
-        Log.d("setupView", "setupView")
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             val adapter = BitcoinChartAdapter(bitcoinChart)
             val lastFive = adapter.getLastFiveValues()
@@ -73,10 +70,7 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             mViewBinding.legendInfo.text =
                 "${chartType.chartName.toUpperCase(Locale.getDefault())} (${bitcoinChart.unit}/${bitcoinChart.period})"
 
-        }
-        )
-
-
+        })
 
         mViewModel.loadingState.observe(this, { state ->
             if (state.isLoading) {
@@ -92,5 +86,4 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             }
         })
     }
-
 }

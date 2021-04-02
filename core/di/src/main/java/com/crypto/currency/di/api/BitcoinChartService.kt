@@ -13,6 +13,4 @@ interface BitcoinChartService {
         @Query("timespan") timespan: String,
         @Query("rollingAverage") rollingAverage: String
     ): BitcoinChartResponse
-
-    //TODO add Query Parameters
 }
