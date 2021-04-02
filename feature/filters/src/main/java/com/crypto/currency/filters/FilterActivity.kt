@@ -48,7 +48,6 @@ class FilterActivity : AppCompatActivity() {
     }
 
     companion object {
-
         fun newInstance(context: Context): Intent {
             return Intent(context, FilterActivity::class.java)
         }

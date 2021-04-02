@@ -8,6 +8,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/filtersHeader"
+        style="@style/Header2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_bitcoinmetrics_filters"
@@ -17,6 +18,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/timeSpan"
+        style="@style/FilterRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +40,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rollingAverage"
+        style="@style/FilterRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

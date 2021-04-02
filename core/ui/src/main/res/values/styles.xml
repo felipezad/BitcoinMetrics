@@ -3,6 +3,7 @@
 
     <style name="DefaultTextView">
         <item name="android:textSize">14sp</item>
+        <item name="android:justificationMode">none</item>
     </style>
 
     <style name="errorViewStyle" parent="DefaultTextView">
@@ -18,10 +19,17 @@
     <style name="Header1" parent="DefaultTextView">
         <item name="android:textSize">48sp</item>
         <item name="android:padding">20dp</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="Header2" parent="DefaultTextView">
         <item name="android:textSize">34sp</item>
         <item name="android:padding">20dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="FilterRow">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:padding">5dp</item>
     </style>
 </resources>
