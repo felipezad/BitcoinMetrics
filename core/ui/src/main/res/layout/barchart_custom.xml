@@ -7,23 +7,4 @@
     android:clipChildren="true"
     android:orientation="horizontal">
 
-    <include
-        android:id="@+id/firstBarchart"
-        layout="@layout/bar_chart_item" />
-
-    <include
-        android:id="@+id/secondBarchart"
-        layout="@layout/bar_chart_item" />
-
-    <include
-        android:id="@+id/thirdBarchart"
-        layout="@layout/bar_chart_item" />
-
-    <include
-        android:id="@+id/fourthBarchart"
-        layout="@layout/bar_chart_item" />
-
-    <include
-        android:id="@+id/fifthBarchart"
-        layout="@layout/bar_chart_item" />
 </LinearLayout>

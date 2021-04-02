@@ -12,6 +12,7 @@ import com.crypto.currency.ui.BaseFragment
 import com.crypto.currency.ui.BitcoinChartAdapter
 import com.crypto.currency.ui.BundleKey
 import com.crypto.currency.ui.changeVisibility
+import com.crypto.currency.ui.databinding.BarChartItemBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -47,29 +48,25 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             val adapter = BitcoinChartAdapter(bitcoinChart)
             val lastFive = adapter.getLastFiveValues()
+
             mViewBinding.barchartCustom.run {
-                firstBarchart.barLabel.text = lastFive[0].second
-                firstBarchart.barShape.layoutParams.height = lastFive[0].first
-
-                secondBarchart.barLabel.text = lastFive[1].second
-                secondBarchart.barShape.layoutParams.height = lastFive[1].first
-
-                thirdBarchart.barLabel.text = lastFive[2].second
-                thirdBarchart.barShape.layoutParams.height = lastFive[2].first
-
-                fourthBarchart.barLabel.text = lastFive[3].second
-                fourthBarchart.barShape.layoutParams.height = lastFive[3].first
-
-                fifthBarchart.barLabel.text = lastFive[4].second
-                fifthBarchart.barShape.layoutParams.height = lastFive[4].first
+                lastFive.forEach { pair ->
+                    val item = BarChartItemBinding.inflate(layoutInflater, this.root, false)
+                    item.barLabel.text = pair.second
+                    item.barShape.layoutParams.height = pair.first
+                    this.root.addView(item.root)
+                }
 
                 this.barCustomChart.invalidate()
             }
             mViewBinding.chartName.text = bitcoinChart.name
             mViewBinding.chartDescription.text = bitcoinChart.description
-            mViewBinding.legendInfo.text =
-                "${chartType.chartName.toUpperCase(Locale.getDefault())} (${bitcoinChart.unit}/${bitcoinChart.period})"
-
+            mViewBinding.legendInfo.text = resources.getString(
+                R.string.barinfo_legend,
+                chartType.chartName.toUpperCase(Locale.getDefault()),
+                bitcoinChart.unit,
+                bitcoinChart.period
+            )
         })
 
         mViewModel.loadingState.observe(this, { state ->
