@@ -47,8 +47,6 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
     override fun setupView() {
         //TODO Change
         Log.d("setupView", "setupView")
-        mViewBinding.legendInfo.text = chartType.chartName.toUpperCase(Locale.getDefault())
-
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
             val adapter = BitcoinChartAdapter(bitcoinChart)
             val lastFive = adapter.getLastFiveValues()
@@ -72,6 +70,9 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             }
             mViewBinding.chartName.text = bitcoinChart.name
             mViewBinding.chartDescription.text = bitcoinChart.description
+            mViewBinding.legendInfo.text =
+                "${chartType.chartName.toUpperCase(Locale.getDefault())} (${bitcoinChart.unit}/${bitcoinChart.period})"
+
         }
         )
 
