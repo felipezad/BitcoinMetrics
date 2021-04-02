@@ -70,6 +70,8 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
 
                 this.barCustomChart.invalidate()
             }
+            mViewBinding.chartName.text = bitcoinChart.name
+            mViewBinding.chartDescription.text = bitcoinChart.description
         }
         )
 
