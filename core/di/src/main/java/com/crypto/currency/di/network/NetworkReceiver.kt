@@ -18,8 +18,11 @@ class NetworkReceiver : BroadcastReceiver() {
         val conn = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities: NetworkCapabilities? =
             conn.getNetworkCapabilities(conn.activeNetwork)
-
-        _wifiAvailable.value =
+        val newStatus =
             networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+        if (newStatus != _wifiAvailable.value) {
+            _wifiAvailable.value = newStatus
+        }
+
     }
 }
