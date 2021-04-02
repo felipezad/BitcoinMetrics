@@ -16,8 +16,6 @@ import com.crypto.currency.bitcoin.R
 import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BundleKey
-import com.crypto.currency.ui.gone
-import com.crypto.currency.ui.show
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -74,10 +72,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         networkReceiver.wifiAvailable.observe(this, { isConnected ->
-            if (isConnected) {
-                findViewById<View>(R.id.iconNoInternet).gone()
-            } else {
-                findViewById<View>(R.id.iconNoInternet).show()
+            if (isConnected == false) {
+                featureNavigator.navigateToError(this)
             }
         })
     }

@@ -25,6 +25,7 @@
 
         <TextView
             android:id="@+id/chartName"
+            style="@style/DefaultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/chartDescription"
@@ -32,6 +33,7 @@
 
         <TextView
             android:id="@+id/chartDescription"
+            style="@style/DefaultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/barchartCustom"
@@ -59,6 +61,7 @@
 
         <TextView
             android:id="@+id/legendInfo"
+            style="@style/DefaultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

@@ -32,13 +32,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-
-    <ImageView
-        android:id="@+id/iconNoInternet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/there_is_no_internet_connection_try_again_later"
-        android:src="@drawable/ic_baseline_signal_cellular_connected_no_internet_4_bar_48" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat.startActivity
 
 interface AppNavigator {
 
+    fun navigateToError(context: Context)
+
     fun navigateToFilters(context: Context)
 
     fun navigateTo(context: Context, intent: Intent) {

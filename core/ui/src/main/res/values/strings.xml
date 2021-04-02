@@ -1,0 +1,4 @@
+<resources>
+    <string name="there_is_no_internet_connection_try_again_later">There is no internet connection! Try again, later</string>
+    <string name="error_message">The internet connection is offline, you won\'t be able to load new data from now on, please try connecting again!</string>
+</resources>
