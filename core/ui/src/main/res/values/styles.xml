@@ -6,9 +6,14 @@
         <item name="android:justificationMode">none</item>
     </style>
 
+    <style name="BarLabelChart">
+        <item name="android:textSize">12sp</item>
+        <item name="android:justificationMode">none</item>
+    </style>
+
     <style name="errorViewStyle" parent="DefaultTextView">
         <item name="android:textSize">18sp</item>
-        <item name="android:fontWeight">5</item>
+        <item name="android:fontWeight">50</item>
         <item name="android:padding">20dp</item>
     </style>
 
