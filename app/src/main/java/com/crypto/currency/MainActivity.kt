@@ -1,5 +1,7 @@
 package com.crypto.currency
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,8 +13,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.crypto.currency.bitcoin.R
+import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BundleKey
+import com.crypto.currency.ui.gone
+import com.crypto.currency.ui.show
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,10 +28,19 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var featureNavigator: FeaturesNavigator
 
+    @Inject
+    lateinit var networkReceiver: NetworkReceiver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupView()
+        setupNetworkManagement()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.unregisterReceiver(networkReceiver)
     }
 
     override fun onBackPressed() {
@@ -53,6 +67,21 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setupNetworkManagement() {
+        this.registerReceiver(
+            networkReceiver,
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
+
+        networkReceiver.wifiAvailable.observe(this, { isConnected ->
+            if (isConnected) {
+                findViewById<View>(R.id.iconNoInternet).gone()
+            } else {
+                findViewById<View>(R.id.iconNoInternet).show()
+            }
+        })
+    }
+
     private fun setupView() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -61,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
         setupBottomNavigation(navView, navController)
+
     }
 
     private fun setupBottomNavigation(navView: BottomNavigationView, navController: NavController) {

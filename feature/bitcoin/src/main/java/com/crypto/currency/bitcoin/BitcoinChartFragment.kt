@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
+import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
@@ -15,10 +16,14 @@ import com.crypto.currency.ui.changeVisibility
 import com.crypto.currency.ui.databinding.BarChartItemBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoinChartBinding>() {
+
+    @Inject
+    lateinit var networkReceiver: NetworkReceiver
 
     override val mViewModel: BitcoinChartViewModel by viewModels()
 
@@ -80,6 +85,12 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 mViewBinding.barchartCustom.barCustomChart.changeVisibility()
                 mViewBinding.legendInfo.changeVisibility()
                 mViewBinding.legendBox.changeVisibility()
+            }
+        })
+
+        networkReceiver.wifiAvailable.observe(this, { isConnected ->
+            if (isConnected) {
+                mViewModel.getCharByName(chartType)
             }
         })
     }

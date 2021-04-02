@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.crypto.currency.di.api.BitcoinChartService
 import com.crypto.currency.di.mapper.EpochFormatter
+import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.di.storage.InMemoryStorage
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -57,4 +58,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideInMemoryStorage() = InMemoryStorage()
+
+    @Provides
+    @Singleton
+    fun provideNetworkReceiver() = NetworkReceiver()
 }

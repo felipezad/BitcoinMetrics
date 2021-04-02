@@ -3,6 +3,7 @@ package com.crypto.currency.di.features
 import android.content.Context
 import com.bumptech.glide.RequestManager
 import com.crypto.currency.bitcoin.BitcoinChartFragment
+import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.filters.FilterActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -13,8 +14,8 @@ import dagger.hilt.components.SingletonComponent
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 interface BitcoinChartFeatureDependencies {
-
     fun requestGlideManager(): RequestManager
+    fun requestNetworkReceiver(): NetworkReceiver
 }
 
 @Component(dependencies = [BitcoinChartFeatureDependencies::class])
