@@ -7,7 +7,7 @@ import org.junit.Test
 
 class InMemoryStorageTest {
 
-    lateinit var subject: Storage<BitcoinFilter>
+    private lateinit var subject: Storage<BitcoinFilter>
 
     @Before
     fun setup() {

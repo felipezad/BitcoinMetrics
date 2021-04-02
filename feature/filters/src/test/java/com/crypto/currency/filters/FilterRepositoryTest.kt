@@ -12,7 +12,7 @@ class FilterRepositoryTest {
 
     private lateinit var subject: FilterRepository
 
-    var storage: InMemoryStorage = spyk()
+    private var storage: InMemoryStorage = spyk()
 
     @Before
     fun setup() {

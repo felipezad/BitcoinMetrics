@@ -2,7 +2,6 @@ package com.crypto.currency.bitcoin
 
 import com.crypto.currency.model.chart.BitcoinChart
 import com.google.common.truth.Truth
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.Test
 
 class BitcoinChartMapperTest {

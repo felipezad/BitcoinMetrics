@@ -9,7 +9,7 @@ class BitcoinChartAdapter(private val bitcoinChart: BitcoinChart) {
     fun getLastFiveValues(): List<Pair<Int, String>> {
         var latestValue = 0f
         var previousHeight = heightConstant
-        return bitcoinChart.values.takeLast(5).map { it ->
+        return bitcoinChart.values.takeLast(5).map {
             val currentValue = it.y.toFloat()
             val pair = calculateRelativeHeight(
                 currentValue = currentValue,

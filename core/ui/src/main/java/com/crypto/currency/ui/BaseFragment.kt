@@ -20,7 +20,7 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding> : Fragment() {
 
     protected abstract val mViewModel: VM
 
-    protected var fragmentContext: Context? = null
+    private var fragmentContext: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
