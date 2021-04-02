@@ -32,25 +32,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+        <include
+            android:id="@+id/barchartCustom"
+            layout="@layout/barchart_custom"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/barChart"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView" />
 
+        <View
+            android:id="@+id/legendBox"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/black"
+            app:layout_constraintStart_toStartOf="@id/barchartCustom"
+            app:layout_constraintTop_toBottomOf="@id/barchartCustom" />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/barChart"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lineChart" />
+        <TextView
+            android:id="@+id/legendInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/legendBox"
+            app:layout_constraintStart_toEndOf="@id/legendBox"
+            app:layout_constraintTop_toTopOf="@id/legendBox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

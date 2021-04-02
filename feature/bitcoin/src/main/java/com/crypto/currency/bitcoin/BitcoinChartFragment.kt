@@ -10,10 +10,11 @@ import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
 import com.crypto.currency.ui.BaseFragment
+import com.crypto.currency.ui.BitcoinChartAdapter
 import com.crypto.currency.ui.BundleKey
-import com.github.mikephil.charting.components.XAxis.XAxisPosition
-import com.github.mikephil.charting.data.*
+import com.crypto.currency.ui.changeVisibility
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -25,7 +26,7 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         return FragmentBitcoinChartBinding.inflate(layoutInflater)
     }
 
-    private var charType: ChartTypes = ChartTypes.TOTAL_BITCOINS
+    private var chartType: ChartTypes = ChartTypes.TOTAL_BITCOINS
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,85 +34,58 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
         savedInstanceState: Bundle?
     ): View? {
         arguments?.getString(BundleKey.CHART_NAME.key)?.let {
-            charType = ChartTypes.from(it)
+            chartType = ChartTypes.from(it)
         }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onResume() {
         super.onResume()
-        mViewModel.getCharByName(charType)
+        mViewModel.getCharByName(chartType)
     }
 
     override fun setupView() {
         //TODO Change
         Log.d("setupView", "setupView")
+        mViewBinding.legendInfo.text = chartType.chartName.toUpperCase(Locale.getDefault())
+
         mViewModel.bitcoinChartData.observe(this, { bitcoinChart: BitcoinChart ->
-            var numberOfColumnsX = 0f
-            val listSize = bitcoinChart.values.size
-            bitcoinChart.values.take(7).mapTo(mutableListOf(), { value ->
-                Entry(numberOfColumnsX++, value.y.toFloat())
-            }).also {
-                val lineDataset = LineDataSet(it, charType.name)
-                val lineData = LineData(lineDataset)
+            val adapter = BitcoinChartAdapter(bitcoinChart)
+            val lastFive = adapter.getLastFiveValues()
+            mViewBinding.barchartCustom.run {
+                firstBarchart.barLabel.text = lastFive[0].second
+                firstBarchart.barShape.layoutParams.height = 50
 
+                secondBarchart.barLabel.text = lastFive[1].second
+                secondBarchart.barShape.layoutParams.height = 100
 
-                mViewBinding.lineChart.run {
-                    xAxis.position = XAxisPosition.BOTTOM
-                    xAxis.granularity = 1f
-                    xAxis.labelCount = 7
-                    xAxis.setDrawLabels(false)
+                thirdBarchart.barLabel.text = lastFive[2].second
+                thirdBarchart.barShape.layoutParams.height = 150
 
-                    axisRight.setDrawLabels(false)
-                    axisRight.isEnabled = false
+                fourthBarchart.barLabel.text = lastFive[3].second
+                fourthBarchart.barShape.layoutParams.height = 200
 
-                    axisLeft.setDrawLabels(false)
+                fifthBarchart.barLabel.text = lastFive[4].second
+                fifthBarchart.barShape.layoutParams.height = 250
 
-                    description.text = ""
-
-                    data = lineData
-
-                    invalidate()
-                }
+                this.barCustomChart.invalidate()
             }
-
-            bitcoinChart.values.take(7).mapTo(mutableListOf(), { value ->
-                BarEntry(numberOfColumnsX++, value.y.toFloat())
-            }).also {
-                val barDataSet = BarDataSet(it, charType.name)
-
-                val barData = BarData(barDataSet)
-                barData.dataSetLabels
-                barData.barWidth = 0.9f
-
-                mViewBinding.barChart.run {
-                    setFitBars(true)
-                    xAxis.position = XAxisPosition.BOTTOM
-                    xAxis.setDrawGridLines(false)
-                    xAxis.granularity = 1f
-                    xAxis.setDrawLabels(false)
-                    description.text = ""
+        }
+        )
 
 
-                    data = barData
-                    setFitBars(true)
-
-                    axisLeft.setDrawLabels(false) // no axis labels
-                    axisLeft.setDrawGridLines(false) // no grid lines
-                    axisLeft.setDrawZeroLine(true) // draw a zero line
-                    axisRight.isEnabled = false
-
-
-                    invalidate()
-                }
-            }
-        })
 
         mViewModel.loadingState.observe(this, { state ->
             if (state.isLoading) {
                 mViewBinding.contentLoadingProgressBar.show()
+                mViewBinding.barchartCustom.barCustomChart.changeVisibility()
+                mViewBinding.legendInfo.changeVisibility()
+                mViewBinding.legendBox.changeVisibility()
             } else {
                 mViewBinding.contentLoadingProgressBar.hide()
+                mViewBinding.barchartCustom.barCustomChart.changeVisibility()
+                mViewBinding.legendInfo.changeVisibility()
+                mViewBinding.legendBox.changeVisibility()
             }
         })
     }

@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation project(":common:model")
 
     implementation libraries
     implementation arch_libraries
