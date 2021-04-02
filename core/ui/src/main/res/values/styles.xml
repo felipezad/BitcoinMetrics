@@ -15,4 +15,13 @@
         <item name="android:alpha">0.5</item>
     </style>
 
+    <style name="Header1" parent="DefaultTextView">
+        <item name="android:textSize">48sp</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="Header2" parent="DefaultTextView">
+        <item name="android:textSize">34sp</item>
+        <item name="android:padding">20dp</item>
+    </style>
 </resources>
