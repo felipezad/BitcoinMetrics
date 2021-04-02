@@ -27,17 +27,15 @@
             android:id="@+id/chartName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/chartDescription"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/chartDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chartName" />
+            app:layout_constraintBottom_toTopOf="@id/barchartCustom"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             android:id="@+id/barchartCustom"
@@ -45,18 +43,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/legendBox"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chartDescription" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/legendBox"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@android:color/black"
-            app:layout_constraintStart_toStartOf="@id/barchartCustom"
-            app:layout_constraintTop_toBottomOf="@id/barchartCustom" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/barchartCustom" />
 
         <TextView
             android:id="@+id/legendInfo"

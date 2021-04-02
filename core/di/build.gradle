@@ -48,8 +48,6 @@ ext {
     def android_chart_version = 'v3.1.0'
 
     libraries = [
-            // Android Chart Library
-            "com.github.PhilJay:MPAndroidChart:${android_chart_version}",
             //dependecy injection - hilt
             "com.google.dagger:hilt-android:$hilt_version",
 

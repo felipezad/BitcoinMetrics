@@ -52,19 +52,19 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             val lastFive = adapter.getLastFiveValues()
             mViewBinding.barchartCustom.run {
                 firstBarchart.barLabel.text = lastFive[0].second
-                firstBarchart.barShape.layoutParams.height = 50
+                firstBarchart.barShape.layoutParams.height = lastFive[0].first
 
                 secondBarchart.barLabel.text = lastFive[1].second
-                secondBarchart.barShape.layoutParams.height = 100
+                secondBarchart.barShape.layoutParams.height = lastFive[1].first
 
                 thirdBarchart.barLabel.text = lastFive[2].second
-                thirdBarchart.barShape.layoutParams.height = 150
+                thirdBarchart.barShape.layoutParams.height = lastFive[2].first
 
                 fourthBarchart.barLabel.text = lastFive[3].second
-                fourthBarchart.barShape.layoutParams.height = 200
+                fourthBarchart.barShape.layoutParams.height = lastFive[3].first
 
                 fifthBarchart.barLabel.text = lastFive[4].second
-                fifthBarchart.barShape.layoutParams.height = 250
+                fifthBarchart.barShape.layoutParams.height = lastFive[4].first
 
                 this.barCustomChart.invalidate()
             }
