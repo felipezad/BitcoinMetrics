@@ -5,6 +5,7 @@ import com.crypto.currency.model.ActionResult
 import com.crypto.currency.model.Failure
 import com.crypto.currency.model.Success
 import com.crypto.currency.model.chart.BitcoinFilter
+import com.crypto.currency.ui.InvalidFilterBitcoinException
 import javax.inject.Inject
 
 class AddBitcoinFilterUseCase @Inject constructor(private val repository: FilterRepository) :
@@ -12,6 +13,9 @@ class AddBitcoinFilterUseCase @Inject constructor(private val repository: Filter
 
     override suspend fun execute(param: Param): ActionResult<BitcoinFilter> {
         return try {
+            if (param.bitcoinFilter == BitcoinFilter.emptyFilter) {
+                throw InvalidFilterBitcoinException()
+            }
             val result = repository.addToStorage(param.bitcoinFilter)
             Success(result)
         } catch (e: Exception) {

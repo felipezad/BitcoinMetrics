@@ -26,6 +26,10 @@ class FilterViewModel @Inject constructor(private val addBitcoinFilterUseCase: A
     val loadingState: LiveData<Loading>
         get() = _loadingState
 
+    private val _errorState = MutableLiveData<Failure>()
+    val errorState: LiveData<Failure>
+        get() = _errorState
+
     fun addFilters(timeSpan: Int, rollingAverage: Int) {
         _loadingState.value = Loading(true)
         viewModelScope.launch {
@@ -45,7 +49,7 @@ class FilterViewModel @Inject constructor(private val addBitcoinFilterUseCase: A
     private fun updateUI(result: ActionResult<BitcoinFilter>) {
         when (result) {
             is Failure -> {
-                Log.e("Failure", result.failure.message!!)
+                _errorState.value = result
             }
 
             is Success -> {

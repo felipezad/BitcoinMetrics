@@ -45,6 +45,10 @@ class FilterActivity : AppCompatActivity() {
             finish()
         })
 
+        filterViewModel.errorState.observe(this@FilterActivity, { filterSaved ->
+            finish()
+        })
+
     }
 
     companion object {
