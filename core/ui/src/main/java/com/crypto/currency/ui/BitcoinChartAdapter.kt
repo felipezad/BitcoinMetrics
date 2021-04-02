@@ -2,11 +2,14 @@ package com.crypto.currency.ui
 
 import com.crypto.currency.model.chart.BitcoinChart
 
+typealias Height = Int
+typealias Value = String
+
 class BitcoinChartAdapter(private val bitcoinChart: BitcoinChart) {
 
     private val heightConstant = 50
 
-    fun getLastFiveValues(): List<Pair<Int, String>> {
+    fun getLastFiveValues(): List<Pair<Height, Value>> {
         var latestValue = 0f
         var previousHeight = heightConstant
         return bitcoinChart.values.takeLast(5).map {
