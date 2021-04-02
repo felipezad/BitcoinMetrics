@@ -87,10 +87,17 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
             }
         })
 
-        networkReceiver.wifiAvailable.observe(this, { isConnected ->
-            if (isConnected) {
-                mViewModel.getCharByName(chartType)
-            }
+        mViewModel.errorState.observe(this, { state ->
+            mViewBinding.chartName.text = getString(R.string.check_your_connection)
+            mViewBinding.chartDescription.text = getString(R.string.unable_to_connect)
         })
+
+        networkReceiver.wifiAvailable.observe(this,
+            { isConnected ->
+                if (isConnected) {
+                    mViewBinding.contentLoadingProgressBar.changeVisibility()
+                    mViewModel.getCharByName(chartType)
+                }
+            })
     }
 }
