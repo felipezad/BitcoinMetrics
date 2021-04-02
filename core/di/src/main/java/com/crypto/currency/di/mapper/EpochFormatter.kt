@@ -8,7 +8,6 @@ object EpochFormatter {
 
     private val formatterYear: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val formatterMonth: DateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
-    private val formatterDay: DateTimeFormatter = DateTimeFormatter.ofPattern("dd")
 
     fun toYearMonthDayDateFormat(epochTime: Long): String {
         return try {
