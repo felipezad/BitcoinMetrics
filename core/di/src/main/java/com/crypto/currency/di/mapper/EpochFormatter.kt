@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 object EpochFormatter {
 
     private val formatterYear: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    private val formatterMonth: DateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
+    private val formatterMonth: DateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd")
 
     fun toYearMonthDayDateFormat(epochTime: Long): String {
         return try {
