@@ -8,7 +8,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.crypto.currency.bitcoin.R
-import com.crypto.currency.ui.ErrorActivity
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
