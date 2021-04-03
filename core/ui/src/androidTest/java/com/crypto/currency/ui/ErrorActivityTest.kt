@@ -20,7 +20,7 @@ class ErrorActivityTest {
     var activityRule = ActivityScenarioRule(ErrorActivity::class.java)
 
     @Test
-    fun checkFilterActivityIcon() {
+    fun checkNoInternetConnectivityIcon() {
         val errorView = onView(
             allOf(
                 ViewMatchers.withId(R.id.iconNoInternet),
