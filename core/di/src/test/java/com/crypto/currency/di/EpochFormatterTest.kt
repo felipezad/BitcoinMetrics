@@ -10,7 +10,7 @@ class EpochFormatterTest {
 
     @Test
     fun `format Valid Epoch time to TimeStamp correctly`() {
-        assertEquals("2015-09-18 00:00:00", EpochFormatter.toYearMonthDayDateFormat(1442534400))
+        assertEquals("2015-09-18", EpochFormatter.toYearMonthDayDateFormat(1442534400))
     }
 
     @Test(expected = DateTimeException::class)
