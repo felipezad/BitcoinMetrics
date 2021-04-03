@@ -9,9 +9,7 @@ import com.crypto.currency.bitcoin.databinding.FragmentBitcoinChartBinding
 import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.model.chart.BitcoinChart
 import com.crypto.currency.model.chart.ChartTypes
-import com.crypto.currency.ui.BaseFragment
-import com.crypto.currency.ui.BundleKey
-import com.crypto.currency.ui.changeVisibility
+import com.crypto.currency.ui.*
 import com.crypto.currency.ui.databinding.BarChartItemBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -71,25 +69,25 @@ class BitcoinChartFragment : BaseFragment<BitcoinChartViewModel, FragmentBitcoin
                 bitcoinChart.unit,
                 bitcoinChart.period
             )
+            mViewBinding.legendInfo.show()
+            mViewBinding.legendBox.show()
+            mViewBinding.barchartCustom.barCustomChart.show()
         })
 
         mViewModel.loadingState.observe(this, { state ->
             if (state.isLoading) {
                 mViewBinding.contentLoadingProgressBar.show()
-                mViewBinding.barchartCustom.barCustomChart.changeVisibility()
-                mViewBinding.legendInfo.changeVisibility()
-                mViewBinding.legendBox.changeVisibility()
             } else {
                 mViewBinding.contentLoadingProgressBar.hide()
-                mViewBinding.barchartCustom.barCustomChart.changeVisibility()
-                mViewBinding.legendInfo.changeVisibility()
-                mViewBinding.legendBox.changeVisibility()
             }
         })
 
         mViewModel.errorState.observe(this, { state ->
             mViewBinding.chartName.text = getString(R.string.check_your_connection)
             mViewBinding.chartDescription.text = getString(R.string.unable_to_connect)
+            mViewBinding.legendInfo.gone()
+            mViewBinding.legendBox.gone()
+            mViewBinding.barchartCustom.barCustomChart.gone()
         })
 
         networkReceiver.wifiAvailable.observe(this,

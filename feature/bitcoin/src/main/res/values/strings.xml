@@ -1,5 +1,5 @@
 <resources>
     <string name="barinfo_legend">%1$s (%2$s/%3$s)</string>
     <string name="check_your_connection">Please, check your connection</string>
-    <string name="unable_to_connect">Unable to connect to the Bitcoin Api</string>
+    <string name="unable_to_connect">Unable to connect to the Bitcoin Server</string>
 </resources>

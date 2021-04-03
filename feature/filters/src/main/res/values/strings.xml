@@ -1,6 +1,6 @@
 <resources>
-    <string name="timespan">timeSpan</string>
-    <string name="rollingaverage">rollingAverage</string>
+    <string name="timespan">Time span</string>
+    <string name="rollingaverage">Rolling average</string>
     <string name="chart_duration_info">Duration of the chart (in Weeks), default is 1 year for most charts, 1 week for mempool charts. (Optional)</string>
     <string name="chart_rolling_average_info">Duration (in Hours) over which the data should be averaged. (Optional)</string>
     <string name="welcome_to_bitcoinmetrics_filters">BitcoinMetrics Filters</string>
