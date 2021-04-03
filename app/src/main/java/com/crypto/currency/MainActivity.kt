@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             val nextMetrics = R.id.action_bitcoinFragment_self
             when (item.itemId) {
-                R.id.navigation_filters -> {
+                R.id.navigation_bottom_chart_one -> {
                     navController.navigate(
                         nextMetrics,
                         bundleOf(BundleKey.CHART_NAME.key to ChartTypes.TOTAL_BITCOINS.chartName)

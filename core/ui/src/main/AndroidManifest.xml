@@ -3,7 +3,9 @@
     package="com.crypto.currency.ui">
 
     <application>
-        <activity android:name=".ErrorActivity" />
+        <activity
+            android:name=".ErrorActivity"
+            android:theme="@style/ErrorActivityTheme" />
     </application>
 
 </manifest>

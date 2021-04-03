@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ErrorActivityTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:textSize">14sp</item>
+        <item name="android:justificationMode">none</item>
+    </style>
 
     <style name="DefaultTextView">
         <item name="android:textSize">14sp</item>
