@@ -5,6 +5,7 @@
     <application>
         <activity
             android:name=".ErrorActivity"
+            android:launchMode="singleTop"
             android:theme="@style/ErrorActivityTheme" />
     </application>
 

@@ -5,6 +5,7 @@ import com.bumptech.glide.RequestManager
 import com.crypto.currency.bitcoin.BitcoinChartFragment
 import com.crypto.currency.di.network.NetworkReceiver
 import com.crypto.currency.filters.FilterActivity
+import com.crypto.currency.ui.ErrorActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.hilt.EntryPoint
@@ -46,5 +47,24 @@ interface FilterFeatureComponent {
         fun context(@BindsInstance context: Context): Builder
         fun appDependencies(filterDependencies: FilterFeatureDependencies): Builder
         fun build(): FilterFeatureComponent
+    }
+}
+
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface ErrorDependencies {
+    fun requestNetworkReceiver(): NetworkReceiver
+}
+
+@Component(dependencies = [ErrorDependencies::class])
+interface ErrorComponent {
+
+    fun inject(activity: ErrorActivity)
+
+    @Component.Builder
+    interface Builder {
+        fun context(@BindsInstance context: Context): Builder
+        fun appDependencies(errorDependencies: ErrorDependencies): Builder
+        fun build(): ErrorComponent
     }
 }

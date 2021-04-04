@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner  "com.crypto.currency.ui.CoreUIRunnerTest"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation project(":common:model")
+    implementation project(":core:di")
 
     implementation libraries
     implementation arch_libraries
