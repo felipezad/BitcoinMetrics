@@ -2,6 +2,8 @@ package com.crypto.currency.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.crypto.currency.di.network.NetworkReceiver
@@ -17,6 +19,10 @@ class ErrorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_error)
+        this.registerReceiver(
+            networkReceiver,
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
         networkReceiver.wifiAvailable.observe(this, { isConnected ->
             if (isConnected) {
                 this@ErrorActivity.finish()
