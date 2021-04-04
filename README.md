@@ -63,5 +63,7 @@ The reason behind this decision is to create a concise and well decoupled projec
 ![](images/project_architecture.png)
 
 ## Feature demo
-![](images/app_bitcoin_metrics_v1.mp4)
+https://user-images.githubusercontent.com/7407289/113511971-de95d280-9538-11eb-8694-4fde2dda0e48.mp4
+
+
 
