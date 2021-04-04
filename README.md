@@ -3,8 +3,14 @@
 **BitcoinMetrics** is a sample app Android application 📱 built to demonstrate use of Modern Android development tools️. 
 
 ## About
+
 BitcoinMetrics is an Android app that display bitcoin metrics data in Bar chart
 
+The application features :
+ * network state management that verify if the connection is available
+ * plot of bar char with thirty last days of data
+ * add filters to improve data retrieval
+ * display three different metrics-> Total Bitcoins, Market Value, Transactions.
 
 ![Sequence](images/sequenceBitcoinMetrics.jpeg)
 ![State Diagram](images/stateDiagramBitcoinMetrics.jpg)
@@ -51,10 +57,11 @@ The reason behind this decision is to create a concise and well decoupled projec
 
 * Each layer may contain one or more module, but all of them must be logical related
 * The use of UseCases induces the behavior of single responsibility, because each use case may contain only one public method.
-
+* This architecture also escalates well with the multi module project because each team could work on separated features.
 
 
 ![](images/project_architecture.png)
 
 ## Feature demo
+![](images/app_bitcoin_metrics_v1.mp4)
 
